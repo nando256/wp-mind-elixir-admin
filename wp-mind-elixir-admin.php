@@ -79,9 +79,9 @@ function mea_admin_enqueue_scripts( $hook_suffix ) {
         // Mind Elixir library from CDN.
         wp_enqueue_script(
                 'wp-mind-elixir-cdn',
-                'https://cdn.jsdelivr.net/npm/mind-elixir/dist/MindElixir.iife.js',
+                'https://cdn.jsdelivr.net/npm/mind-elixir@4.6.2/dist/MindElixir.iife.js',
                 array(),
-                '4.5.2',
+                '4.6.2',
                 true
         );
         // Our custom JS (depends on jQuery and Mind Elixir).
