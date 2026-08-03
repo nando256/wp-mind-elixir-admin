@@ -1,0 +1,32 @@
+name: Build and Release WordPress Plugin
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build & Release Zip
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create Plugin Zip Archive
+        run: |
+          mkdir -p build/wp-mind-elixir-admin
+          rsync -rc --exclude='.git*' --exclude='.github' --exclude='build' ./ build/wp-mind-elixir-admin/
+          cd build
+          zip -r ../wp-mind-elixir-admin.zip wp-mind-elixir-admin
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: wp-mind-elixir-admin.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -3,7 +3,7 @@
  * Plugin Name: 	Mind Elixir Admin Mind Maps
  * Plugin URI: 		https://blog.donguri3.net
  * Description: 	Adds an admin page for creating/editing mind maps using Mind Elixir.
- * Version: 		1.2
+ * Version: 		1.3.0
  * Requires at least:	6.8
  * Requires PHP:	8.3
  * Author:		nando256
@@ -79,9 +79,9 @@ function mea_admin_enqueue_scripts( $hook_suffix ) {
         // Mind Elixir library from CDN.
         wp_enqueue_script(
                 'wp-mind-elixir-cdn',
-                'https://cdn.jsdelivr.net/npm/mind-elixir@4.6.2/dist/MindElixir.iife.js',
+                'https://cdn.jsdelivr.net/npm/mind-elixir@5.15.0/dist/MindElixir.iife.js',
                 array(),
-                '4.6.2',
+                '5.15.0',
                 true
         );
         // Our custom JS (depends on jQuery and Mind Elixir).
@@ -95,11 +95,12 @@ function mea_admin_enqueue_scripts( $hook_suffix ) {
 
 
         // Localize script with saved data and AJAX info.
-        //$saved = get_option( 'mind_elixir_map_data', '' );
         wp_localize_script( 'wp-mind-elixir-admin-js', 'MEAMapData', array(
-                //'initial'  => $saved ? $saved : '',
-                'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( 'mea_map_nonce' )
+                'ajax_url'   => admin_url( 'admin-ajax.php' ),
+                'nonce'      => wp_create_nonce( 'mea_map_nonce' ),
+                'rest_url'   => esc_url_raw( rest_url( 'wp/v2/' ) ),
+                'rest_nonce' => wp_create_nonce( 'wp_rest' ),
+                'site_name'  => get_bloginfo( 'name' ),
         ) );
 
         // Basic CSS for the map container.
@@ -121,9 +122,10 @@ function mea_render_admin_page() {
     <div class="wrap">
         <h1>Mind Map Editor</h1>
         <div id="map"></div>
-        <p>
+        <p class="mea-toolbar">
             <select id="mea-map-selector"></select>
             <button id="save-map-button" class="button button-primary">Save Mind Map</button>
+            <button id="mea-import-wp-posts" class="button button-secondary">⚡ 全記事インポート</button>
             <button id="mea-export-svg" class="button">SVG ダウンロード</button>
             <button id="mea-export-png" class="button">PNG ダウンロード</button>
             <button id="new-map-button" class="button">New Mind Map</button>

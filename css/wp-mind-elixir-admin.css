@@ -6,6 +6,35 @@
     background: #fff;
     margin-bottom: 10px;
 }
+
+/* Toolbar styling */
+.mea-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+.mea-toolbar select,
+.mea-toolbar button,
+.mea-toolbar label {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+#mea-import-wp-posts {
+    background-color: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+    font-weight: 600;
+}
+
+#mea-import-wp-posts:hover {
+    background-color: #135e96;
+    border-color: #135e96;
+    color: #fff;
+}
+
 /* Status message styling */
 #save-status {
     margin-top: 10px;
