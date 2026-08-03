@@ -3,7 +3,7 @@
  * Plugin Name: 	Mind Elixir Admin Mind Maps
  * Plugin URI: 		https://blog.donguri3.net
  * Description: 	Adds an admin page for creating/editing mind maps using Mind Elixir.
- * Version: 		1.3.0
+ * Version: 		1.3.1
  * Requires at least:	6.8
  * Requires PHP:	8.3
  * Author:		nando256
@@ -103,11 +103,19 @@ function mea_admin_enqueue_scripts( $hook_suffix ) {
                 'site_name'  => get_bloginfo( 'name' ),
         ) );
 
+        // Mind Elixir CSS library from CDN.
+        wp_enqueue_style(
+                'wp-mind-elixir-cdn-css',
+                'https://cdn.jsdelivr.net/npm/mind-elixir@5.15.0/dist/MindElixir.css',
+                array(),
+                '5.15.0'
+        );
+
         // Basic CSS for the map container.
         wp_enqueue_style(
                 'wp-mind-elixir-admin-css',
                 plugin_dir_url(__FILE__) . 'css/wp-mind-elixir-admin.css',
-                array(),
+                array( 'wp-mind-elixir-cdn-css' ),
                 '1.0'
         );
 }

@@ -1,7 +1,10 @@
 jQuery(document).ready(function($){
+    // Compatible MindElixir constructor resolution (supports both Mind Elixir v4 & v5)
+    const ME = (typeof MindElixir !== 'undefined' && MindElixir.default) ? MindElixir.default : MindElixir;
+
     let mind;
-    mind = new MindElixir({ el: '#map' });
-    mind.init(MindElixir.new('New Mind Map'));
+    mind = new ME({ el: '#map' });
+    mind.init(ME.new('New Mind Map'));
 
     var intervalMs = 5 * 60 * 1000;
     // 定期実行を開始
@@ -51,7 +54,7 @@ jQuery(document).ready(function($){
             .done(function(response){
                 if (response.success) {
                     if(typeof response.data == 'undefined' || !response.data) {
-                        mind.init(MindElixir.new('New Mind Map'));
+                        mind.init(ME.new('New Mind Map'));
                     } else {
                         mind.init(response.data);
                     }
@@ -124,7 +127,7 @@ jQuery(document).ready(function($){
 
     // New button handler: create a new root node and refresh the map.
     $('#new-map-button').on('click', function(){
-        const newData = MindElixir.new('New Mind Map');
+        const newData = ME.new('New Mind Map');
         mind.refresh(newData);  // Replace with a new mind map.
         const today = new Date().toISOString().replaceAll(/[-T:Z\.]/g,'');
         var name = 'mind_elixir_map_data_' + today;

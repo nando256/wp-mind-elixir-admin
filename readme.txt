@@ -3,7 +3,7 @@ Contributors: nando256
 Donate link: https://github.com/bomura/wp-mind-elixir-admin
 Tags: mind map, mindelixir, admin, editor, mind mapping, mindmap
 Tested up to: 6.8
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -44,8 +44,8 @@ WordPress options table under the key 'mind_elixir_map_data'.
 * Loaded Mind Elixir via CDN.
 * Implemented mind map save and reset features.
 
-= 1.3.0 =
-* Updated Mind Elixir library to 5.15.0.
+= 1.3.1 =
+* Updated Mind Elixir library to 5.15.0 with full constructor & CSS compatibility.
 * Added full WordPress posts and categories mind map import feature via REST API.
 * Added GitHub Actions release workflow for packaging zip archives.
 
@@ -58,7 +58,7 @@ Changed to be able to manage multiple mind maps
 Added auto-save function every 5 minutes
 = 1.3 =
 Added image (png, svg) saving function
-= 1.3.0 =
+= 1.3.1 =
 Added full posts & categories import feature and updated Mind Elixir library to 5.15.0.
 
 == License ==
