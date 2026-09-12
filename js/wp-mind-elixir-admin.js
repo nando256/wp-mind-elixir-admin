@@ -3,7 +3,10 @@ jQuery(document).ready(function($){
     const ME = (typeof MindElixir !== 'undefined' && MindElixir.default) ? MindElixir.default : MindElixir;
 
     let mind;
-    mind = new ME({ el: '#map' });
+    mind = new ME({
+        el: document.getElementById('map'),
+        editable: true
+    });
     mind.init(ME.new('New Mind Map'));
 
     var intervalMs = 5 * 60 * 1000;
